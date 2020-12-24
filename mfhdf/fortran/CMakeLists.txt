@@ -1,0 +1,168 @@
+cmake_minimum_required (VERSION 3.10)
+project (HDF4_MFHDF_FORTRAN C Fortran)
+
+INCLUDE_DIRECTORIES (
+    ${HDF4_HDF_BINARY_DIR}
+    ${HDF4_MFHDF_FORTRAN_BINARY_DIR}
+    ${HDF4_HDF_TESTSOURCE_DIR}
+)
+
+if (HDF4_ENABLE_NETCDF)
+  configure_file (${HDF4_MFHDF_FORTRAN_SOURCE_DIR}/ftest.f.in ${HDF4_BINARY_DIR}/ftest.f)
+  configure_file (${HDF4_MFHDF_FORTRAN_SOURCE_DIR}/jackets.c.in ${HDF4_BINARY_DIR}/jackets.c)
+endif ()
+configure_file (${HDF4_MFHDF_FORTRAN_SOURCE_DIR}/netcdf.inc.in ${HDF4_BINARY_DIR}/netcdf.inc)
+set (HDF4_MFHDF_FORTRAN_XFHDRS ${HDF4_BINARY_DIR}/netcdf.inc ${HDF4_MFHDF_FORTRAN_SOURCE_DIR}/mffunc.inc)
+
+if (HDF4_ENABLE_NETCDF)
+  set (HDF4_MFHDF_LIBSRC_CSTUB_FSRCS ${HDF4_BINARY_DIR}/jackets.c ${HDF4_MFHDF_FORTRAN_SOURCE_DIR}/mfsdf.c)
+else ()
+  set (HDF4_MFHDF_LIBSRC_CSTUB_FSRCS ${HDF4_MFHDF_FORTRAN_SOURCE_DIR}/mfsdf.c)
+endif ()
+
+set (HDF4_MFHDF_LIBSRC_CSTUB_FHDRS
+    ${HDF4_MFHDFSOURCE_DIR}/hdf2netcdf.h
+    ${HDF4_MFHDFSOURCE_DIR}/mfhdf.h
+    ${HDF4_MFHDFSOURCE_DIR}/mfhdfi.h
+)
+if (HDF4_ENABLE_NETCDF)
+#  set (HDF4_MFHDF_LIBSRC_CSTUB_FSRCS ${HDF4_MFHDF_LIBSRC_CSTUB_FSRCS} ${HDF4_BINARY_DIR}/jackets.c)
+  set (HDF4_MFHDF_LIBSRC_CSTUB_FHDRS ${HDF4_MFHDF_LIBSRC_CSTUB_FHDRS} ${HDF4_BINARY_DIR}/netcdf.h)
+else ()
+  set (HDF4_MFHDF_LIBSRC_CSTUB_FHDRS ${HDF4_MFHDF_LIBSRC_CSTUB_FHDRS} ${HDF4_BINARY_DIR}/hdf4_netcdf.h)
+endif ()
+set_source_files_properties (${HDF4_MFHDF_LIBSRC_CSTUB_FSRCS} PROPERTIES LANGUAGE C)
+
+set (FORTRAN_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
+#-----------------------------------------------------------------------------
+# Add Main fortran library
+#-----------------------------------------------------------------------------
+if (NOT ONLY_SHARED_LIBS)
+  add_library (${HDF4_MF_FCSTUB_LIB_TARGET} STATIC ${HDF4_MFHDF_LIBSRC_CSTUB_FSRCS} ${HDF4_MFHDF_LIBSRC_CSTUB_FHDRS} ${HDF4_HDF_SRC_CHDRS} ${HDF4_HDFSOURCE_DIR}/hproto_fortran.h)
+  target_include_directories(${HDF4_MF_FCSTUB_LIB_TARGET}
+      PRIVATE "${HDF4_HDF_BINARY_DIR};${HDF4_HDFSOURCE_DIR};${HDF4_MFHDFSOURCE_DIR}"
+      INTERFACE "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>"
+  )
+  TARGET_C_PROPERTIES (${HDF4_MF_FCSTUB_LIB_TARGET} STATIC)
+  target_link_libraries (${HDF4_MF_FCSTUB_LIB_TARGET} PUBLIC ${HDF4_MF_LIB_TARGET})
+  set_global_variable (HDF4_LIBRARIES_TO_EXPORT "${HDF4_LIBRARIES_TO_EXPORT};${HDF4_MF_FCSTUB_LIB_TARGET}")
+  H4_SET_LIB_OPTIONS (${HDF4_MF_FCSTUB_LIB_TARGET} ${HDF4_MF_FCSTUB_LIB_NAME} STATIC)
+  set_target_properties (${HDF4_MF_FCSTUB_LIB_TARGET} PROPERTIES
+      FOLDER libraries/fortran
+      LINKER_LANGUAGE C
+      COMPILE_DEFINITIONS "HDF"
+      INTERFACE_INCLUDE_DIRECTORIES "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>"
+  )
+  set (install_targets ${HDF4_MF_FCSTUB_LIB_TARGET})
+endif ()
+
+if (BUILD_SHARED_LIBS)
+  add_library (${HDF4_MF_FCSTUB_LIBSH_TARGET} SHARED ${HDF4_MFHDF_LIBSRC_CSTUB_FSRCS} ${HDF4_MFHDF_LIBSRC_CSTUB_FHDRS} ${HDF4_HDF_SRC_CHDRS} ${HDF4_HDFSOURCE_DIR}/hproto_fortran.h)
+  target_include_directories(${HDF4_MF_FCSTUB_LIBSH_TARGET}
+      PRIVATE "${HDF4_HDF_BINARY_DIR};${HDF4_HDFSOURCE_DIR};${HDF4_MFHDFSOURCE_DIR}"
+      INTERFACE "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>"
+  )
+  TARGET_C_PROPERTIES (${HDF4_MF_FCSTUB_LIBSH_TARGET} SHARED)
+  target_link_libraries (${HDF4_MF_FCSTUB_LIBSH_TARGET} PUBLIC ${HDF4_MF_LIBSH_TARGET})
+  set_global_variable (HDF4_LIBRARIES_TO_EXPORT "${HDF4_LIBRARIES_TO_EXPORT};${HDF4_MF_FCSTUB_LIBSH_TARGET}")
+  H4_SET_LIB_OPTIONS (${HDF4_MF_FCSTUB_LIBSH_TARGET} ${HDF4_MF_FCSTUB_LIB_NAME} SHARED)
+  set_target_properties (${HDF4_MF_FCSTUB_LIBSH_TARGET} PROPERTIES
+      FOLDER libraries/fortran
+      LINKER_LANGUAGE C
+      COMPILE_DEFINITIONS "HDF;H4_BUILT_AS_DYNAMIC_LIB"
+      INTERFACE_INCLUDE_DIRECTORIES "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>"
+      INTERFACE_COMPILE_DEFINITIONS H4_BUILT_AS_DYNAMIC_LIB=1
+  )
+  set (install_targets ${install_targets} ${HDF4_MF_FCSTUB_LIBSH_TARGET})
+endif ()
+
+set (HDF4_MF_FORTRAN_SRCS
+    ${HDF4_MFHDF_FORTRAN_DIR}/mfsdff.f
+)
+set_source_files_properties (${HDF4_MF_FORTRAN_SRCS} PROPERTIES LANGUAGE Fortran)
+#-----------------------------------------------------------------------------
+if (NOT ONLY_SHARED_LIBS)
+  add_library (${HDF4_MF_FORTRAN_LIB_TARGET} STATIC ${HDF4_MF_FORTRAN_SRCS})
+  target_include_directories (${HDF4_MF_FORTRAN_LIB_TARGET}
+      PRIVATE "${HDF4_HDF_BINARY_DIR};${HDF4_MFHDF_FORTRAN_BINARY_DIR};${HDF4_HDFSOURCE_DIR};${HDF4_MFHDFSOURCE_DIR};${HDF4_HDF_TESTSOURCE_DIR}"
+      INTERFACE "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>"
+  )
+  target_compile_definitions (${HDF4_MF_FORTRAN_LIB_TARGET}
+      PRIVATE $<$<STREQUAL:"x${CMAKE_Fortran_SIMULATE_ID}","xMSVC">:${WIN_COMPILE_FLAGS}>
+  )
+  target_link_libraries (${HDF4_MF_FORTRAN_LIB_TARGET} PUBLIC ${HDF4_MF_FCSTUB_LIB_TARGET})
+  set_target_properties (${HDF4_MF_FORTRAN_LIB_TARGET} PROPERTIES
+      FOLDER libraries/fortran
+      LINKER_LANGUAGE Fortran
+      Fortran_MODULE_DIRECTORY ${CMAKE_Fortran_MODULE_DIRECTORY}
+  )
+  if (WIN32)
+    set_property (TARGET ${HDF4_MF_FORTRAN_LIB_TARGET} PROPERTY LINK_FLAGS "/SUBSYSTEM:CONSOLE ${WIN_LINK_FLAGS}")
+  endif ()
+  set_global_variable (HDF4_LIBRARIES_TO_EXPORT "${HDF4_LIBRARIES_TO_EXPORT};${HDF4_MF_FORTRAN_LIB_TARGET}")
+  H4_SET_LIB_OPTIONS (${HDF4_MF_FORTRAN_LIB_TARGET} ${HDF4_MF_FORTRAN_LIB_NAME} STATIC)
+  set (install_targets ${install_targets} ${HDF4_MF_FORTRAN_LIB_TARGET})
+endif ()
+
+if (BUILD_SHARED_LIBS)
+  add_library (${HDF4_MF_FORTRAN_LIBSH_TARGET} SHARED ${HDF4_MF_FORTRAN_SRCS})
+  target_include_directories (${HDF4_MF_FORTRAN_LIBSH_TARGET}
+      PRIVATE "${HDF4_HDF_BINARY_DIR};${HDF4_MFHDF_FORTRAN_BINARY_DIR};${HDF4_HDFSOURCE_DIR};${HDF4_MFHDFSOURCE_DIR};${HDF4_HDF_TESTSOURCE_DIR}"
+      INTERFACE "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>"
+  )
+  target_compile_definitions (${HDF4_MF_FORTRAN_LIBSH_TARGET}
+      PUBLIC "H4_BUILT_AS_DYNAMIC_LIB"
+      PRIVATE $<$<STREQUAL:"x${CMAKE_Fortran_SIMULATE_ID}","xMSVC">:${WIN_COMPILE_FLAGS}>
+  )
+  if (WIN32 AND MSVC)
+    set_property (TARGET ${HDF4_MF_FORTRAN_LIBSH_TARGET} PROPERTY LINK_FLAGS "/SUBSYSTEM:CONSOLE ${WIN_LINK_FLAGS} /DLL /DEF:${HDF4_MFHDF_FORTRAN_SOURCE_DIR}/mfhdf_fortrandll.def")
+  endif ()
+  target_link_libraries (${HDF4_MF_FORTRAN_LIBSH_TARGET} PUBLIC ${HDF4_MF_FCSTUB_LIBSH_TARGET})
+  set_target_properties (${HDF4_MF_FORTRAN_LIBSH_TARGET} PROPERTIES
+      FOLDER libraries/fortran
+      LINKER_LANGUAGE Fortran
+      Fortran_MODULE_DIRECTORY ${CMAKE_Fortran_MODULE_DIRECTORY}
+      INTERFACE_COMPILE_DEFINITIONS H4_BUILT_AS_DYNAMIC_LIB=1
+  )
+  set_global_variable (HDF4_LIBRARIES_TO_EXPORT "${HDF4_LIBRARIES_TO_EXPORT};${HDF4_MF_FORTRAN_LIBSH_TARGET}")
+  H4_SET_LIB_OPTIONS (${HDF4_MF_FORTRAN_LIBSH_TARGET} ${HDF4_MF_FORTRAN_LIB_NAME} SHARED)
+  set (install_targets ${install_targets} ${HDF4_MF_FORTRAN_LIBSH_TARGET})
+endif ()
+
+if (BUILD_TESTING)
+  include (CMakeTests.cmake)
+endif ()
+
+#-----------------------------------------------------------------------------
+# Add file(s) to CMake Install
+#-----------------------------------------------------------------------------
+install (
+    FILES
+        ${HDF4_MFHDF_FORTRAN_XFHDRS}
+    DESTINATION
+        ${HDF4_INSTALL_INCLUDE_DIR}
+    COMPONENT
+        headers
+)
+
+#-----------------------------------------------------------------------------
+# Add library to CMake Install : Installs lib and cmake config info
+#-----------------------------------------------------------------------------
+if (BUILD_SHARED_LIBS)
+  INSTALL_TARGET_PDB (${HDF4_MF_FCSTUB_LIBSH_TARGET} ${HDF4_INSTALL_BIN_DIR} fortlibraries)
+  #INSTALL_TARGET_PDB (${HDF4_MF_FORTRAN_LIBSH_TARGET} ${HDF4_INSTALL_BIN_DIR} fortlibraries)
+endif (BUILD_SHARED_LIBS)
+INSTALL_TARGET_PDB (${HDF4_MF_FCSTUB_LIB_TARGET} ${HDF4_INSTALL_BIN_DIR} fortlibraries)
+
+install (
+    TARGETS
+        ${install_targets}
+    EXPORT
+        ${HDF4_EXPORTED_TARGETS}
+    LIBRARY DESTINATION ${HDF4_INSTALL_LIB_DIR} COMPONENT fortlibraries
+    ARCHIVE DESTINATION ${HDF4_INSTALL_LIB_DIR} COMPONENT fortlibraries
+    RUNTIME DESTINATION ${HDF4_INSTALL_BIN_DIR} COMPONENT fortlibraries
+    FRAMEWORK DESTINATION ${HDF4_INSTALL_FWRK_DIR} COMPONENT fortlibraries
+    INCLUDES DESTINATION include
+)

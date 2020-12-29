@@ -45,7 +45,7 @@
     The new version of the netCDF library(2.4.3?) has fixed 
     this I think. To fix it here requires merging in those fixes.*/
 
-#define NETCDF_READ_TEST 
+/* #define NETCDF_READ_TEST  */
 
 /* all test functions to be called in main */
 extern int test_netcdf_reading();

@@ -134,7 +134,7 @@ am_hdftest_OBJECTS = hdftest.$(OBJEXT) tutils.$(OBJEXT) \
 	texternal.$(OBJEXT) tfile.$(OBJEXT) tmixed_apis.$(OBJEXT) \
 	trank0.$(OBJEXT) tsd.$(OBJEXT) tsdsprops.$(OBJEXT) \
 	tszip.$(OBJEXT) tattdatainfo.$(OBJEXT) tdatainfo.$(OBJEXT) \
-	tdatasizes.$(OBJEXT)
+	tdatasizes.$(OBJEXT) tnetcdf.$(OBJEXT)
 hdftest_OBJECTS = $(am_hdftest_OBJECTS)
 hdftest_DEPENDENCIES = $(LIBMFHDF) $(LIBHDF) $(XDRLIB)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -160,10 +160,10 @@ am__depfiles_remade = ./$(DEPDIR)/cdftest.Po ./$(DEPDIR)/hdfnctest.Po \
 	./$(DEPDIR)/tdim.Po ./$(DEPDIR)/temptySDSs.Po \
 	./$(DEPDIR)/texternal.Po ./$(DEPDIR)/tfile.Po \
 	./$(DEPDIR)/tmixed_apis.Po ./$(DEPDIR)/tncunlim.Po \
-	./$(DEPDIR)/tncvargetfill.Po ./$(DEPDIR)/trank0.Po \
-	./$(DEPDIR)/tsd.Po ./$(DEPDIR)/tsdsprops.Po \
-	./$(DEPDIR)/tszip.Po ./$(DEPDIR)/tunlim.Po \
-	./$(DEPDIR)/tutils.Po
+	./$(DEPDIR)/tncvargetfill.Po ./$(DEPDIR)/tnetcdf.Po \
+	./$(DEPDIR)/trank0.Po ./$(DEPDIR)/tsd.Po \
+	./$(DEPDIR)/tsdsprops.Po ./$(DEPDIR)/tszip.Po \
+	./$(DEPDIR)/tunlim.Po ./$(DEPDIR)/tutils.Po
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -633,7 +633,7 @@ hdfnctest_LDADD = $(LIBMFHDF) $(LIBHDF) $(XDRLIB) @LIBS@
 hdftest_SOURCES = hdftest.c tutils.c tchunk.c tcomp.c tcoordvar.c	\
 		  tdim.c temptySDSs.c tattributes.c texternal.c tfile.c	\
 		  tmixed_apis.c trank0.c tsd.c tsdsprops.c	\
-		  tszip.c tattdatainfo.c tdatainfo.c tdatasizes.c # tnetcdf.c 
+		  tszip.c tattdatainfo.c tdatainfo.c tdatasizes.c tnetcdf.c 
 
 hdftest_LDADD = $(LIBMFHDF) $(LIBHDF) $(XDRLIB) @LIBS@
 DISTCLEANFILES = 
@@ -736,6 +736,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tmixed_apis.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tncunlim.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tncvargetfill.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tnetcdf.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/trank0.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tsd.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tsdsprops.Po@am__quote@ # am--include-marker
@@ -1090,6 +1091,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/tmixed_apis.Po
 	-rm -f ./$(DEPDIR)/tncunlim.Po
 	-rm -f ./$(DEPDIR)/tncvargetfill.Po
+	-rm -f ./$(DEPDIR)/tnetcdf.Po
 	-rm -f ./$(DEPDIR)/trank0.Po
 	-rm -f ./$(DEPDIR)/tsd.Po
 	-rm -f ./$(DEPDIR)/tsdsprops.Po
@@ -1158,6 +1160,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/tmixed_apis.Po
 	-rm -f ./$(DEPDIR)/tncunlim.Po
 	-rm -f ./$(DEPDIR)/tncvargetfill.Po
+	-rm -f ./$(DEPDIR)/tnetcdf.Po
 	-rm -f ./$(DEPDIR)/trank0.Po
 	-rm -f ./$(DEPDIR)/tsd.Po
 	-rm -f ./$(DEPDIR)/tsdsprops.Po

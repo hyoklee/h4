@@ -34,7 +34,7 @@ hdfnctest_LDADD = $(LIBMFHDF) $(LIBHDF) $(XDRLIB) @LIBS@
 hdftest_SOURCES = hdftest.c tutils.c tchunk.c tcomp.c tcoordvar.c	\
 		  tdim.c temptySDSs.c tattributes.c texternal.c tfile.c	\
 		  tmixed_apis.c trank0.c tsd.c tsdsprops.c	\
-		  tszip.c tattdatainfo.c tdatainfo.c tdatasizes.c # tnetcdf.c 
+		  tszip.c tattdatainfo.c tdatainfo.c tdatasizes.c tnetcdf.c 
 hdftest_LDADD = $(LIBMFHDF) $(LIBHDF) $(XDRLIB) @LIBS@
 
 #############################################################################

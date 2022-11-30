@@ -4,7 +4,7 @@ name: hdf4 dev CI
 on:
   workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths-ignore:
     - '.github/**'
     - 'release_notes/**'

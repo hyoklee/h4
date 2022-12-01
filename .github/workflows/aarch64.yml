@@ -21,6 +21,7 @@ jobs:
           githubToken: ${{ github.token }}
           install: |
             apt-get update -q -y
+            apt-get install -q -y gfortran g++
             apt-get install -q -y git cmake libjpeg-dev zlib1g zlib1g-dev
           run: |
             echo ::set-output name=uname::$(uname -a)

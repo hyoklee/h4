@@ -25,8 +25,8 @@ jobs:
             apt-get install -q -y gfortran g++  yacc flex libtool autotools-dev
           run: |
             echo ::set-output name=uname::$(uname -a)
-            git clone https://github.com/hyoklee/hdf4-1
-            cd hdf4-1
+            git clone https://github.com/hyoklee/hdf4
+            cd hdf4
             autoreconf -fvi
             ./configure --disable-fortran --disable-netcdf --enable-hdf4-xdr 
             make

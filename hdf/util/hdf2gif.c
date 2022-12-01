@@ -13,6 +13,7 @@
 
 #include "gif.h"
 #include <stdio.h>
+#include <string.h>
 
 #define HDFNAME "laser.hdf"
 #define VGROUPCLASS "RIG0.0"

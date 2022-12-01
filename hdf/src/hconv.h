@@ -59,7 +59,7 @@
 /* CONSTANT DEFINITIONS                                                      */
 /*****************************************************************************/
 /* Generally Big-Endian machines */
-#if !defined(INTEL86) && !defined(MIPSEL) && !defined(DEC_ALPHA) && !defined(I860) && !defined(SUN386) && !(defined(__ia64) && !(defined(hpux) || defined(__hpux))) && !defined(__x86_64__)
+#if !defined(INTEL86) && !defined(MIPSEL) && !defined(DEC_ALPHA) && !defined(I860) && !defined(SUN386) && !(defined(__ia64) && !(defined(hpux) || defined(__hpux))) && !defined(__x86_64__) && !(defined(__powerpc__) && defined(__LITTLE_ENDIAN__)) && !defined(__aarch64__) && !defined(__ARM_EABI__) && !defined(__riscv)
 #       define UI8_IN     DFKnb1b   /* Unsigned Integer, 8 bits */
 #       define UI8_OUT    DFKnb1b
 #       define SI16_IN    DFKnb2b   /* S = Signed */

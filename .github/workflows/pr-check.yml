@@ -1,4 +1,4 @@
-name: hdf4 dev CI
+name: check PR
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 on:

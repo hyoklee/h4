@@ -23,12 +23,12 @@ jobs:
             apt-get update -q -y
             apt-get install -q -y git cmake libjpeg-dev zlib1g zlib1g-dev
             apt-get install -q -y gfortran g++  yacc flex libtool autotools-dev
-          run: |
+            apt-get install -q -y libtirpc-common libtirpc-dev libtirpc3 
             echo ::set-output name=uname::$(uname -a)
             git clone https://github.com/hyoklee/hdf4
             cd hdf4
             autoreconf -fvi
-            ./configure --disable-fortran --disable-netcdf --enable-hdf4-xdr 
+            ./configure --disable-fortran --disable-netcdf CFLAGS="-I/usr/include/tirpc/" LDLFAGS="-ltirpc"
             make
             make test
 

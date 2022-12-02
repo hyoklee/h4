@@ -27,10 +27,7 @@ jobs:
             echo ::set-output name=uname::$(uname -a)
             git clone https://github.com/hyoklee/hdf4
             cd hdf4
-            autoreconf -fvi
-            ./configure --disable-fortran --disable-netcdf CFLAGS="-I/usr/include/tirpc/" LDLFAGS="-ltirpc"
-            make
-            make test
+            ./ci.sh
 
       - name: Get the output
         # Echo the `uname` output parameter from the `runcmd` step

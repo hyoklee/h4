@@ -1,4 +1,4 @@
-name: linux arm64-gcc CMake
+name: amd64 arm64-gcc CMake
 
 on:
   workflow_dispatch:

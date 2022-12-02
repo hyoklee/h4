@@ -24,6 +24,13 @@ jobs:
         ls ./aarch64-linux-musl-cross/bin/
         sudo cp -r ./aarch64-linux-musl-cross/aarch64-linux-musl/lib/* /lib/
         ls /lib/
+        git clone https://github.com/uclouvain/openjpeg/
+        cd openjpeg
+        mkdir build
+        cd build
+        cmake  .. -DCMAKE_BUILD_TYPE=Release
+        make
+        sudo make install
         ls
         mkdir build
         cd build

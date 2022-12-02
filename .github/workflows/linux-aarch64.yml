@@ -29,7 +29,7 @@ jobs:
         cd h4map/jpeg-6b
         ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar
         make
-        sudo make install
+        sudo make install-lib
         cd ../..
         pwd
         ls

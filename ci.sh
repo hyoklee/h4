@@ -2,7 +2,7 @@
 echo $CFLAGS
 echo $LDFLAGS
 export CFLAGS+=" -I/usr/include/tirpc/"
-export LDFLAGS+=" -ltirpc"
+export LDFLAGS+=" -ltirpc -lxdr -lrpc"
 echo $CFLAGS
 echo $LDFLAGS
 autoreconf -fvi

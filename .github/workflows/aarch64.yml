@@ -1,4 +1,4 @@
-name: aarch64 CMake
+name: arm64 CMake
 
 on: [push, pull_request]
 

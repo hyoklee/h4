@@ -1,4 +1,4 @@
-name: Ubuntu clang/gcc Autotools/CMake
+name: amd64 clang/gcc Autotools/CMake
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 on:

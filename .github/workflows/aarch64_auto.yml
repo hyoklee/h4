@@ -1,4 +1,4 @@
-name: aarch64 Autotools
+name: arm64 Autotools
 
 on: [push, pull_request]
 

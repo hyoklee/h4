@@ -24,11 +24,10 @@ jobs:
         ls ./aarch64-linux-musl-cross/bin/
         sudo cp -r ./aarch64-linux-musl-cross/aarch64-linux-musl/lib/* /lib/
         ls /lib/
-        git clone https://github.com/uclouvain/openjpeg/
-        cd openjpeg
-        mkdir build
-        cd build
-        cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc -DCMAKE_AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar -DCMAKE_SYSTEM_PROCESSOR=arm .. 
+        wget https://gamma.hdfgroup.org/ftp/pub/outgoing/h4map/src/h4map.tar.gz
+        tar zxvf h4map.tar.gz
+        cd h4map/jpeg-6b
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar
         make
         sudo make install
         cd ../..

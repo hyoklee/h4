@@ -11,21 +11,21 @@ jobs:
     - name: Install gcc-arch64
       run: |
         sudo apt-get update
-        sudo apt-get install -y gcc-aarch64-linux-gnu
-        sudo apt-get install binfmt-support qemu qemu-user-static
+        sudo apt-get install -y -q gcc-aarch64-linux-gnu
+        sudo apt-get install -y -q binfmt-support qemu qemu-user-static
     - name: Get Sources
       uses: actions/checkout@v3
     - name: Build and Test
       run: |
         echo $PWD
-        wget https://musl.cc/aarch64-linux-musl-cross.tgz
-        tar -xvzf aarch64-linux-musl-cross.tgz      
+        wget -q https://musl.cc/aarch64-linux-musl-cross.tgz
+        tar -xzf aarch64-linux-musl-cross.tgz      
         ./aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc --version
         ls ./aarch64-linux-musl-cross/bin/
         sudo cp -r ./aarch64-linux-musl-cross/aarch64-linux-musl/lib/* /lib/
         ls /lib/
         wget https://gamma.hdfgroup.org/ftp/pub/outgoing/h4map/src/h4map.tar.gz
-        tar zxvf h4map.tar.gz
+        tar zvf h4map.tar.gz
         cd h4map/jpeg-6b
         ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar
         make
@@ -45,7 +45,7 @@ jobs:
         cd libtirpc
         chmod u+x ./autogen.sh
         ./autogen.sh
-        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --diasable-gssapi
         make
         sudo make install
         cd ..

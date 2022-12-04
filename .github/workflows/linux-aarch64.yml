@@ -41,6 +41,13 @@ jobs:
         make
         sudo make install
         cd ../..
+        git clone https://github.com/alisw/libtirpc
+        cd libtirpc
+        ./autogen.sh
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar
+        make
+        sudo make install
+        cd ..
         pwd
         ls
         mkdir build

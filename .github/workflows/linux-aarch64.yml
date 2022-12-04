@@ -21,11 +21,17 @@ jobs:
         wget -q https://musl.cc/aarch64-linux-musl-cross.tgz
         tar -xzf aarch64-linux-musl-cross.tgz      
         ./aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc --version
-        ls ./aarch64-linux-musl-cross/bin/
         sudo cp -r ./aarch64-linux-musl-cross/aarch64-linux-musl/lib/* /lib/
-        ls /lib/
-        wget https://gamma.hdfgroup.org/ftp/pub/outgoing/h4map/src/h4map.tar.gz
-        tar zvf h4map.tar.gz
+        git clone https://github.com/alisw/libtirpc
+        cd libtirpc
+        chmod u+x ./autogen.sh
+        ./autogen.sh
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --diasable-gssapi
+        make
+        sudo make install
+        cd ..        
+        wget -q https://gamma.hdfgroup.org/ftp/pub/outgoing/h4map/src/h4map.tar.gz
+        tar -xzf h4map.tar.gz
         cd h4map/jpeg-6b
         ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar
         make
@@ -41,14 +47,6 @@ jobs:
         make
         sudo make install
         cd ../..
-        git clone https://github.com/alisw/libtirpc
-        cd libtirpc
-        chmod u+x ./autogen.sh
-        ./autogen.sh
-        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --diasable-gssapi
-        make
-        sudo make install
-        cd ..
         pwd
         ls
         mkdir build

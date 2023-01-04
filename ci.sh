@@ -12,4 +12,5 @@ autoreconf -fvi
 ./configure --enable-shared --disable-fortran --disable-netcdf
 cat ./config.log
 make
-make test
+make check
+

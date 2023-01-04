@@ -9,7 +9,7 @@ echo $CFLAGS
 echo $LDFLAGS
 echo $EXT2LIB
 autoreconf -fvi
-./configure --disable-fortran --disable-netcdf
+./configure --enable-shared --disable-fortran --disable-netcdf
 cat ./config.log
 make
 make test

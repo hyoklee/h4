@@ -55,6 +55,6 @@ jobs:
         pwd
         ls
         autoreconf -fvi
-       ./configure CFLAGS="-I/usr/include/drpc/" LDFLAGS="-lnsl -ldrpc" --disable-netcdf --disable-fortran --enable-shared --prefix=/usr/local        
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar CFLAGS="-I/usr/include/drpc/" LDFLAGS="-lnsl -ldrpc" --disable-netcdf --disable-fortran --enable-shared --prefix=/usr/local 
         make
         make check

@@ -38,7 +38,7 @@ jobs:
         wget -q https://gamma.hdfgroup.org/ftp/pub/outgoing/h4map/src/h4map.tar.gz
         tar -xzf h4map.tar.gz
         cd h4map/jpeg-6b
-        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar CFLAGS="-I/usr/include/drpc/" LDFLAGS="-lnsl -ldrpc" --host=arm --disable-fortran --enable-shared --prefix=/usr/local
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar
         make
         sudo make install-lib
         cd ../..
@@ -55,6 +55,6 @@ jobs:
         pwd
         ls
         autoreconf -fvi
-        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar CFLAGS="-I/usr/include/drpc/" LDFLAGS="-lnsl -ldrpc" --disable-netcdf --disable-fortran --enable-shared --prefix=/usr/local 
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --host=arm --disable-netcdf --disable-fortran --enable-shared --prefix=/usr/local 
         make
         make check

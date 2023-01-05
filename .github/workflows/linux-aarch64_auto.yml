@@ -1,0 +1,60 @@
+name: amd64 arm64-gcc Autotools
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install gcc-arch64
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y -q gcc-aarch64-linux-gnu
+        sudo apt-get install -y -q binfmt-support qemu qemu-user-static
+    - name: Get Sources
+      uses: actions/checkout@v3
+    - name: Build and Test
+      run: |
+        echo $PWD
+        echo $PATH
+        wget -q https://musl.cc/aarch64-linux-musl-cross.tgz
+        tar -xzf aarch64-linux-musl-cross.tgz      
+        ./aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc --version
+        sudo cp -r ./aarch64-linux-musl-cross/aarch64-linux-musl/lib/* /lib/
+        # git clone https://github.com/alisw/libtirpc
+        # cd libtirpc
+        # git clone https://github.com/idunham/libdrpc
+        git clone https://github.com/hyoklee/libdrpc
+        cd libdrpc
+        # chmod u+x ./autogen.sh
+        # ./autogen.sh
+        #./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --disable-gssapi
+        # sudo cp /home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc /bin/musl-gcc
+        make
+        sudo make install
+        cd ..        
+        wget -q https://gamma.hdfgroup.org/ftp/pub/outgoing/h4map/src/h4map.tar.gz
+        tar -xzf h4map.tar.gz
+        cd h4map/jpeg-6b
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar
+        make
+        sudo make install-lib
+        cd ../..
+        pwd
+        ls
+        git clone https://github.com/madler/zlib
+        cd zlib
+        mkdir build
+        cd build
+        cmake -DCMAKE_C_COMPILER=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc -DCMAKE_AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar -DCMAKE_SYSTEM_PROCESSOR=arm ..
+        make
+        sudo make install
+        cd ../..
+        pwd
+        ls
+        autoreconf -fvi
+       ./configure CFLAGS="-I/usr/include/drpc/" LDFLAGS="-lnsl -ldrpc" --disable-netcdf --disable-fortran --enable-shared --prefix=/usr/local        
+        make
+        make check

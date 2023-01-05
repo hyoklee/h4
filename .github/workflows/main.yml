@@ -118,7 +118,7 @@ jobs:
       run: |
         mkdir "${{ runner.workspace }}/build"
         cd "${{ runner.workspace }}/build"
-        $GITHUB_WORKSPACE/configure --disable-shared --${{ matrix.xdr }}-hdf4-xdr --${{ matrix.netcdf }}-netcdf --${{ matrix.java }}-java --${{ matrix.fortran }}-fortran
+        $GITHUB_WORKSPACE/configure --enable-shared --${{ matrix.xdr }}-hdf4-xdr --${{ matrix.netcdf }}-netcdf --${{ matrix.java }}-java --${{ matrix.fortran }}-fortran
       shell: bash
 
     - name: Configure

@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Install gcc-arch64
+    - name: Install gcc-aarch64
       run: |
         sudo apt-get update
         sudo apt-get install -y -q gcc-aarch64-linux-gnu
@@ -60,6 +60,6 @@ jobs:
         pwd
         ls
         autoreconf -fvi
-        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --host=arm --disable-netcdf --disable-fortran --enable-shared --prefix=/usr/local --with-jpeg=/usr/local --with-zlib=/usr/local
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --host=aarch64-linux-gnu --disable-netcdf --disable-fortran --enable-shared --prefix=/usr/local --with-jpeg=/usr/local --with-zlib=/usr/local
         make
         make check

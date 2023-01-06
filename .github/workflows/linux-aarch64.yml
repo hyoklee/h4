@@ -66,6 +66,6 @@ jobs:
         mkdir build
         cd build
         sudo cp -r /home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/aarch64-linux-musl/lib/* /lib/        
-        cmake -DCMAKE_C_COMPILER=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc -DCMAKE_AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar -DCMAKE_SYSTEM_PROCESSOR=aarch64-linux-musl -DHDF4_BUILD_FORTRAN:BOOL=OFF ..        
+        cmake -DCMAKE_C_COMPILER=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc -DCMAKE_AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar -DCMAKE_SYSTEM_PROCESSOR=aarch64-linux-musl -DHDF4_BUILD_FORTRAN:BOOL=OFF -DJPEG_DIR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross -DZLIB_DIR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross ..        
         make
         make test

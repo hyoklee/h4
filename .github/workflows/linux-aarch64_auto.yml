@@ -35,7 +35,7 @@ jobs:
         # cd libdrpc
         chmod u+x ./autogen.sh
         ./autogen.sh
-        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --disable-gssapi --host=aarch64-linux-musl
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --disable-gssapi --host=aarch64-linux-musl --prefix=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross
         # sudo cp /home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc /bin/musl-gcc
         make
         sudo make install
@@ -43,7 +43,7 @@ jobs:
         wget -q https://gamma.hdfgroup.org/ftp/pub/outgoing/h4map/src/h4map.tar.gz
         tar -xzf h4map.tar.gz
         cd h4map/jpeg-6b
-        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --prefix=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross
         make
         sudo make install-lib
         cd ../..
@@ -51,13 +51,13 @@ jobs:
         ls
         git clone https://github.com/madler/zlib
         cd zlib
-        CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar ./configure
+        CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar ./configure --prefix=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross
         make
         sudo make install
         cd ..
         pwd
         ls
         autoreconf -fvi
-        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar CFLAGS="-I/usr/include/tirpc/" LDFLAGS="-lnsl -ltirpc" --host=aarch64-linux-musl --disable-netcdf --disable-fortran --enable-shared --prefix=/usr/local --with-jpeg=/usr/local --with-zlib=/usr/local
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --host=aarch64-linux-musl --disable-netcdf --disable-fortran --enable-shared --prefix=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross
         make
         make check

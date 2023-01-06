@@ -40,7 +40,7 @@ jobs:
         wget -q https://gamma.hdfgroup.org/ftp/pub/outgoing/h4map/src/h4map.tar.gz
         tar -xzf h4map.tar.gz
         cd h4map/jpeg-6b
-        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --prefix=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross --enable-shared
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --prefix=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross
         make
         sudo make install-lib
         cd ../..

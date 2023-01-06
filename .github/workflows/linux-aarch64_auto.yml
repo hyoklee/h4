@@ -30,9 +30,6 @@ jobs:
         wget https://raw.githubusercontent.com/openbsd/src/master/sys/sys/queue.h
         wget https://raw.githubusercontent.com/openbsd/src/master/sys/sys/_null.h
         cd ../..
-        # git clone https://github.com/idunham/libdrpc
-        # git clone https://github.com/hyoklee/libdrpc
-        # cd libdrpc
         chmod u+x ./autogen.sh
         ./autogen.sh
         ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --disable-gssapi --host=aarch64-linux-musl --prefix=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross
@@ -43,7 +40,7 @@ jobs:
         wget -q https://gamma.hdfgroup.org/ftp/pub/outgoing/h4map/src/h4map.tar.gz
         tar -xzf h4map.tar.gz
         cd h4map/jpeg-6b
-        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --prefix=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --prefix=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross --enable-shared
         make
         sudo make install-lib
         cd ../..
@@ -59,6 +56,6 @@ jobs:
         ls
         autoreconf -fvi
         sudo cp -r /home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/aarch64-linux-musl/lib/* /lib/                
-        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --host=aarch64-linux-musl --disable-netcdf --disable-fortran --enable-shared --prefix=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross --with-jpeg=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross --with-zlib=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc CXX=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-g++  AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar CFLAGS="-I/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/include/tirpc/" LDFLAGS="-L/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/lib/ -ltirpc" --host=aarch64-linux-musl --disable-netcdf --disable-fortran --prefix=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross --with-jpeg=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross --with-zlib=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross
         make
         make check

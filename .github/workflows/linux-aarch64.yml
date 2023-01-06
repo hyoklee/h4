@@ -35,14 +35,14 @@ jobs:
         cd ../..
         chmod u+x ./autogen.sh        
         ./autogen.sh
-        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --disable-gssapi --host=aarch64-linux-musl  --prefix=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --disable-gssapi --host=aarch64-linux-musl  --prefix=/usr
         make
         sudo make install
         cd ..        
         wget -q https://gamma.hdfgroup.org/ftp/pub/outgoing/h4map/src/h4map.tar.gz
         tar -xzf h4map.tar.gz
         cd h4map/jpeg-6b
-        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar  --prefix=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar
         make
         sudo make install-lib
         cd ../..
@@ -54,7 +54,7 @@ jobs:
         # sudo make install
         git clone https://github.com/madler/zlib
         cd zlib
-        CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar ./configure --prefix=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross
+        CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar ./configure
         # mkdir build
         # cd build
         # cmake -DCMAKE_C_COMPILER=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc -DCMAKE_AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar -DCMAKE_SYSTEM_PROCESSOR=aarch64-linux-musl ..
@@ -65,7 +65,6 @@ jobs:
         ls
         mkdir build
         cd build
-        sudo cp -r /home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/aarch64-linux-musl/lib/* /lib/        
-        cmake -DCMAKE_C_COMPILER=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc -DCMAKE_AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar -DCMAKE_SYSTEM_PROCESSOR=aarch64-linux-musl -DBUILD_SHARED_LIBS:BOOL=OFF -DHDF4_BUILD_FORTRAN:BOOL=OFF -DJPEG_DIR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross -DZLIB_DIR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross ..        
+        cmake -DCMAKE_C_COMPILER=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc -DCMAKE_AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar -DCMAKE_SYSTEM_PROCESSOR=aarch64-linux-musl -DBUILD_SHARED_LIBS:BOOL=OFF -DHDF4_BUILD_FORTRAN:BOOL=OFF ..        
         make
         make test

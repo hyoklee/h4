@@ -14,7 +14,7 @@ include(CheckTypeSize)
 include(CheckLibraryExists)
 
 ## First try to find the required header files (rpc/types.h, rpc/xdr.h)
-find_path(XDR_INCLUDE_DIR NAMES rpc/types.h PATHS "/usr/include" "/usr/include/tirpc" "/usr/local/include/drpc")
+find_path(XDR_INCLUDE_DIR NAMES rpc/types.h PATHS "/usr/include" "/usr/include/tirpc")
 
 #check for the XDR functions: their interface and the libraries they're hidden in.
     ## Now let's see if we need an extra lib to compile it

@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Install gcc-arch64
+    - name: Install gcc-aarch64
       run: |
         sudo apt-get update
         sudo apt-get install -y -q gcc-aarch64-linux-gnu
@@ -35,7 +35,7 @@ jobs:
         cd ../..
         chmod u+x ./autogen.sh        
         ./autogen.sh
-        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --disable-gssapi --host=arm
+        ./configure CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar --disable-gssapi --host=aarch64-linux-musl 
         make
         sudo make install
         cd ..        
@@ -52,7 +52,7 @@ jobs:
         cd zlib
         mkdir build
         cd build
-        cmake -DCMAKE_C_COMPILER=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc -DCMAKE_AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar -DCMAKE_SYSTEM_PROCESSOR=arm ..
+        cmake -DCMAKE_C_COMPILER=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc -DCMAKE_AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar -DCMAKE_SYSTEM_PROCESSOR=aarch64-linux-musl ..
         make
         sudo make install
         cd ../..
@@ -60,6 +60,6 @@ jobs:
         ls
         mkdir build
         cd build
-        cmake -DCMAKE_C_COMPILER=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc -DCMAKE_AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar -DCMAKE_SYSTEM_PROCESSOR=arm -DJPEG_DIR=/usr/local -DZLIB_DIR=/usr/local -DHDF4_BUILD_FORTRAN:BOOL=OFF ..        
+        cmake -DCMAKE_C_COMPILER=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc -DCMAKE_AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar -DCMAKE_SYSTEM_PROCESSOR=aarch64-linux-musl -DJPEG_DIR=/usr/local -DZLIB_DIR=/usr/local -DHDF4_BUILD_FORTRAN:BOOL=OFF ..        
         make
         make test

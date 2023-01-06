@@ -51,12 +51,10 @@ jobs:
         ls
         git clone https://github.com/madler/zlib
         cd zlib
-        mkdir build
-        cd build
-        cmake -DCMAKE_C_COMPILER=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc -DCMAKE_AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar -DCMAKE_SYSTEM_PROCESSOR=arm ..
+        CC=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar ./configure
         make
         sudo make install
-        cd ../..
+        cd ..
         pwd
         ls
         autoreconf -fvi

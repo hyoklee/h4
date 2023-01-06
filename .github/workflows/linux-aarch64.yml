@@ -60,7 +60,7 @@ jobs:
         # cmake -DCMAKE_C_COMPILER=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-gcc -DCMAKE_AR=/home/runner/work/hdf4/hdf4/aarch64-linux-musl-cross/bin/aarch64-linux-musl-ar -DCMAKE_SYSTEM_PROCESSOR=aarch64-linux-musl ..
         make
         sudo make install
-        cd ../..
+        cd ..
         pwd
         ls
         mkdir build

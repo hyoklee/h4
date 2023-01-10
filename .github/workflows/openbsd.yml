@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: ${{ matrix.os.name }}
-        uses: cross-platform-actions/action@v0.7.0
+        uses: hyoklee/openbsd-action@master
         env:
           FOO: A
           BAR: B        

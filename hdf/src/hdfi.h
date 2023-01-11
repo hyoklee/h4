@@ -1498,7 +1498,7 @@ typedef long              hdf_pint_t;   /* an integer the same size as a pointer
 /*-----------------------------------------------------*/
 /* 64-bit Free BSD */
 
-#if defined __FreeBSD__ && defined __x86_64__
+#if defined __FreeBSD__ && defined __x86_64__ || defined __OpenBSD__ && defined __x86_64__
 
 #ifdef GOT_MACHINE
 If you get an error on this line more than one machine type has been defined.

@@ -41,7 +41,8 @@ jobs:
             sudo pkg_add git
             git clone https://github.com/hyoklee/hdf4
             cd hdf4
-            sudo pkg_add cmake            
+            sudo pkg_add cmake
+            sudo pkg_add jpeg
             mkdir build
             cd build
             cmake -DHDF4_BUILD_FORTRAN:BOOL=OFF ..

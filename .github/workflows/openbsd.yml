@@ -13,7 +13,7 @@ jobs:
       matrix:
         os:
           - name: openbsd
-            architecture: arm64
+            architecture: x86_64
             version: '7.2'
             host: ubuntu-latest
     steps:

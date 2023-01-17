@@ -43,6 +43,7 @@ jobs:
             cd hdf4
             sudo pkg_add cmake
             sudo pkg_add jpeg
+            clang --print-targets
             mkdir build
             cd build
             cmake -DHDF4_BUILD_FORTRAN:BOOL=OFF ..

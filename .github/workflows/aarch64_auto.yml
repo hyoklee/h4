@@ -26,8 +26,8 @@ jobs:
             apt-get install -q -y libtirpc-common libtirpc-dev libtirpc3
           run: |            
             echo ::set-output name=uname::$(uname -a)
-            git clone https://github.com/hyoklee/hdf4
-            cd hdf4
+            git clone https://github.com/hyoklee/h4
+            cd h4
             ./ci.sh
 
       - name: Get the output

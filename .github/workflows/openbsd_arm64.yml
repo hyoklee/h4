@@ -39,7 +39,7 @@ jobs:
             whoami
             env | sort
             sudo pkg_add git
-            git clone https://github.com/hyoklee/hdf4
+            git clone https://github.com/hyoklee/h4
             cd hdf4
             sudo pkg_add cmake
             sudo pkg_add jpeg

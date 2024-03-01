@@ -37,6 +37,6 @@ jobs:
             sudo pkg_add jpeg
             mkdir build
             cd build
-            cmake ..
+            cmake -DHDF4_BUILD_FORTRAN:BOOL=OFF ..
             make
             make test

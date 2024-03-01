@@ -24,7 +24,7 @@ jobs:
         uses: cross-platform-actions/action@v0.23.0
         env:
           FOO: A
-          BAR: B        
+          BAR: B
         with:
           environment_variables: FOO BAR
           operating_system: ${{ matrix.os.name }}
@@ -37,6 +37,6 @@ jobs:
             sudo pkg_add jpeg
             mkdir build
             cd build
-            cmake  ..
+            cmake -DHDF4_BUILD_FORTRAN:BOOL=OFF ..
             make
             make test

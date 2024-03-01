@@ -1,4 +1,4 @@
-name: arm64 OpenBSD 7.2 CMake
+name: r
 
 on:
   push:
@@ -13,15 +13,15 @@ jobs:
       matrix:
         os:
           - name: openbsd
-            architecture: arm64
-            version: '7.2'
+            architecture: x86_64
+            version: '7.4'
             host: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: ${{ matrix.os.name }}
-        uses: cross-platform-actions/action@v0.8.0
+        uses: cross-platform-actions/action@v0.23.0
         env:
           FOO: A
           BAR: B        
@@ -32,20 +32,11 @@ jobs:
           version: '${{ matrix.os.version }}'
           shell: bash          
           run: |
-            uname -a
-            echo $SHELL
-            pwd
-            ls -lah
-            whoami
-            env | sort
             sudo pkg_add git
-            git clone https://github.com/hyoklee/hdf4
-            cd hdf4
             sudo pkg_add cmake
             sudo pkg_add jpeg
-            clang --print-targets
             mkdir build
             cd build
-            cmake -DHDF4_BUILD_FORTRAN:BOOL=OFF ..
+            cmake  ..
             make
             make test

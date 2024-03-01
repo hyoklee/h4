@@ -26,18 +26,13 @@ jobs:
           FOO: A
           BAR: B        
         with:
-          environment_variables: FOO BAR        
+          environment_variables: FOO BAR
           operating_system: ${{ matrix.os.name }}
           architecture: ${{ matrix.os.architecture }}
           version: '${{ matrix.os.version }}'
-          shell: bash          
+          shell: bash
           run: |
             sudo pkg_add git
-<<<<<<< HEAD:.github/workflows/r.yml
-=======
-            git clone https://github.com/hyoklee/h4
-            cd hdf4
->>>>>>> ff5e551f3bb2a9c1c0d7b12d697a53a5eff04ef0:.github/workflows/openbsd.yml
             sudo pkg_add cmake
             sudo pkg_add jpeg
             mkdir build

@@ -9,6 +9,11 @@
 
 [![amd64 clang/gcc Autotools/CMake](https://github.com/hyoklee/h4/actions/workflows/main.yml/badge.svg)](https://github.com/hyoklee/h4/actions/workflows/main.yml)
 
+<<<<<<< HEAD
 [![amd64](https://github.com/hyoklee/h4/actions/workflows/openbsd.yml/badge.svg)](https://github.com/hyoklee/h4/actions/workflows/r.yml)
 [![arm64](https://github.com/hyoklee/h4/actions/workflows/openbsd_arm64.yml/badge.svg)](https://github.com/hyoklee/h4/actions/workflows/arm64.yml)
+=======
+[![amd64 OpenBSD 7.2 CMake](https://github.com/hyoklee/h4/actions/workflows/openbsd.yml/badge.svg)](https://github.com/hyoklee/h4/actions/workflows/openbsd.yml)
+[![arm64 OpenBSD 7.2 CMake](https://github.com/hyoklee/h4/actions/workflows/openbsd_arm64.yml/badge.svg)](https://github.com/hyoklee/h4/actions/workflows/openbsd_arm64.yml)
+>>>>>>> ff5e551f3bb2a9c1c0d7b12d697a53a5eff04ef0
 

@@ -9,5 +9,5 @@
 
 [![amd64 clang/gcc Autotools/CMake](https://github.com/hyoklee/h4/actions/workflows/main.yml/badge.svg)](https://github.com/hyoklee/h4/actions/workflows/main.yml)
 
-[![amd64](https://github.com/hyoklee/h4/actions/workflows/openbsd.yml/badge.svg)](https://github.com/hyoklee/h4/actions/workflows/r.yml)
-[![arm64](https://github.com/hyoklee/h4/actions/workflows/openbsd_arm64.yml/badge.svg)](https://github.com/hyoklee/h4/actions/workflows/arm64.yml)
+[![r](https://github.com/hyoklee/h4/actions/workflows/r.yml/badge.svg)](https://github.com/hyoklee/h4/actions/workflows/r.yml)
+[![arm64](https://github.com/hyoklee/h4/actions/workflows/arm64.yml/badge.svg)](https://github.com/hyoklee/h4/actions/workflows/arm64.yml)
